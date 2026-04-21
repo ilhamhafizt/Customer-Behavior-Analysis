@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilham Hafizt | Customer Behavior Analysis</title>
+    <link rel="shortcut icon" href="assets/shortcut.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/project2.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" >
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        serif: ['DM Serif Display', 'serif'],
+                    },
+                    colors: {
+                        g: {
+                            50:  '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        db: {
+                            bg:      '#1a1f2e',
+                            card:    '#252d3d',
+                            border:  '#2d3748',
+                            border2: '#374151',
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-g-50 text-g-900 font-sans">
+    <!-- Scroll Progress -->
+    <div id="progress-bar"></div>
+
+    <!-- === NAVBAR === -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-[1152px] mx-auto w-full flex items-center justify-between gap-3">
+            <a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/" class="font-serif text-[1.1rem] text-g-700 no-underline whitespace-nowrap flex-shrink-0" target="_blank">
+                Ilham Hafizt<span class="text-g-400">.</span>
+            </a>
+            <div class="flex items-center gap-2.5">
+                <div class="flex items-center bg-g-50 border-[1.5px] border-g-200 rounded-full py-0.5 px-1 gap-0.5">
+                    <button id="btn-id" onclick="setLang('id')" class="lang-btn active text-[0.72rem] font-bold py-[3px] px-2.5 rounded-full border-none cursor-pointer transition-all duration-200 tracking-[0.04em]">ID</button>
+                    <button id="btn-en" onclick="setLang('en')" class="lang-btn text-[0.72rem] font-bold py-[3px] px-2.5 rounded-full border-none cursor-pointer transition-all duration-200 tracking-[0.04em]">EN</button>
+                </div>
+                <a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/" target="_blank" class="flex items-center gap-1.5 text-g-700 text-[0.8rem] font-semibold no-underline bg-g-50 border-[1.5px] border-g-200 py-[5px] px-[14px] rounded-full hover:bg-g-100 transition-colors duration-200 whitespace-nowrap">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                    <span class="max-[440px]:hidden" data-id="Kembali ke Portfolio" data-en="Back to Portfolio">Kembali ke Portfolio</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- === HERO === -->
+    <div class="hero-gradient pt-[94px] pb-12 px-4 border-b border-g-200">
+        <div class="max-w-[1152px] mx-auto">
+            <span class="inline-block bg-g-100 text-g-700 text-[0.68rem] font-bold tracking-[0.05em] uppercase py-1 px-3 rounded-full mb-3.5" data-id="Project — Data Analyst" data-en="Project — Data Analyst">Project — Data Analyst</span>
+            <h1 class="font-serif hero-title text-g-900 leading-[1.15] mb-3.5 max-w-[680px]" data-id="Analisis Perilaku Pelanggan E-Commerce" data-en="E-Commerce Customer Behavior Analysis">E-Commerce Customer Behavior Analysis</h1>
+            <p class="hero-desc text-[#4a6355] max-w-[600px] leading-[1.7] mb-5" data-id="Analisis perilaku pelanggan e-commerce menggunakan Python, Pandas, dan Matplotlib — mencakup segmentasi RFM terhadap 1.000 pelanggan dan analisis retensi kohort bulanan untuk memahami pola loyalitas dan churn." data-en="E-commerce customer behavior analysis using Python, Pandas, and Matplotlib — covering RFM segmentation (Recency, Frequency, Monetary) across 1,000 customers and monthly cohort retention analysis to understand loyalty and churn patterns.">
+                E-commerce customer behavior analysis using Python, Pandas, and Matplotlib — covering RFM segmentation (Recency, Frequency, Monetary) across 1,000 customers and monthly cohort retention analysis to understand loyalty and churn patterns.
+            </p>
+            <div class="flex flex-wrap gap-[7px]">
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">🐍 Python</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">Pandas</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">🗄️ Matplotlib</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">🧹 Data Cleaning</span>
+                <span class="inline-block bg-white border-[1.5px] border-g-200 text-g-700 text-[0.72rem] font-semibold py-[3px] px-[11px] rounded-full">📈 Dashboard</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- === MAIN CONTENT === -->
+    <div class="max-w-[1152px] mx-auto px-4 py-12 pb-24">
+        <div class="grid grid-cols-1 min-[860px]:grid-cols-[1fr_300px] gap-9 items-start">
+            <!-- Left: Main Column -->
+            <div class="flex flex-col gap-9 min-w-0 order-1">
+                <!-- Dashboard Mockup -->
+                <div>
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Visualisasi" data-en="Visualization">Visualization</span>
+                    <div class="font-serif sec-title text-g-900 mb-3.5" data-en="Customer Behavior Dashboard" data-id="">Customer Behavior Dashboard</div>
+                    <div class="bg-db-bg rounded-[14px] overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.22)] border border-db-border">
+                        <!-- Topbar -->
+                        <div class="bg-db-card px-3.5 py-2.5 flex items-center gap-1.5 border-b border-db-border2 overflow-hidden">
+                            <div class="w-[9px] h-[9px] rounded-full bg-[#f87171] flex-shrink-0"></div>
+                            <div class="w-[9px] h-[9px] rounded-full bg-[#fbbf24] flex-shrink-0"></div>
+                            <div class="w-[9px] h-[9px] rounded-full bg-[#4ade80] flex-shrink-0"></div>
+                            <span class="db-truncate text-[#9ca3af] text-[0.68rem] ml-1.5">Python Analytics — Customer Behavior Analysis | Ilham Hafizt</span>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="p-[clamp(12px,3vw,20px)]">
+                            <div class="flex justify-between items-start gap-3 mb-4 flex-wrap">
+                                <div>
+                                    <div class="text-white text-[clamp(0.85rem,2vw,1rem)] font-bold">👥 Customer Behavior Analysis</div>
+                                    <div class="text-[#6b7280] text-[0.65rem] mt-0.5" data-id="Data: Jan 2023 – Des 2024 · 4.312 Transaksi Bersih" data-en="Data: Jan 2023 – Dec 2024 · 4,312 Clean Transactions">
+                                        Data: Jan 2023 – Dec 2024 · 4,312 Clean Transactions
+                                    </div>
+                                </div>
+                                <div class="flex gap-1.5 flex-wrap">
+                                    <button class="bg-g-800 text-g-400 border border-g-500 text-[0.62rem] py-[3px] px-[9px] rounded-[5px] cursor-pointer whitespace-nowrap" data-id="Segmen RFM" data-en="RFM Segments">RFM Segments</button>
+                                    <button class="bg-db-border text-[#9ca3af] border border-db-border2 text-[0.62rem] py-[3px] px-[9px] rounded-[5px] cursor-pointer whitespace-nowrap" data-id="Kohort" data-en="Cohort">Cohort</button>
+                                    <button class="bg-db-border text-[#9ca3af] border border-db-border2 text-[0.62rem] py-[3px] px-[9px] rounded-[5px] cursor-pointer whitespace-nowrap" data-id="Semua Pelanggan" data-en="All Customers">All Customers</button>
+                                </div>
+                            </div>
+
+                            <!-- KPI -->
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-3.5">
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="Total Pelanggan" data-en="Total Customers">Total Customers</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">1,000</div>
+                                    <div class="text-[0.6rem] mt-1 text-[#9ca3af]" data-id="1,000 Unik" data-en="1,000 Unique">1,000 Unique</div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="Champions" data-en="Champions">Champions</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">187</div>
+                                    <div class="text-[0.6rem] mt-1 text-g-400" data-id="18.7% dari Total" data-en="18.7% of Total">18.7% of Total</div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="Rata-Rata Retensi B+1" data-en="Avg Retention M+1">Avg Retention M+1</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">38%</div>
+                                    <div class="text-[0.6rem] mt-1 text-[#f87171]" data-id="Bulan Pertama" data-en="First Month">First Month</div>
+                                </div>
+                                <div class="bg-db-card rounded-[9px] p-3 border border-db-border">
+                                    <div class="text-[#6b7280] text-[0.58rem] uppercase tracking-[0.04em] mb-[5px]" data-id="LTV Rata-Rata" data-en="Avg LTV">Avg LTV</div>
+                                    <div class="kpi-val text-white font-bold leading-[1.2]">Rp 7,4M</div>
+                                    <div class="text-[0.6rem] mt-1 text-[#9ca3af]" data-id="Per Pelanggan" data-en="Per Customer">Per Customer</div>
+                                </div>
+                            </div>
+
+                            <!-- Charts Row 1 -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                                <!-- Donut -->
+                                <div class="bg-[#252d3d] border border-[#2d3748] rounded-lg p-3 overflow-hidden">
+                                    <div class="text-gray-300 text-xs font-semibold mb-2" data-id="Distribusi Segmen RFM" data-en="RFM Segment Distribution">
+                                        RFM Segment Distribution
+                                    </div>
+                                    <div class="relative w-full h-[clamp(110px,18vw,140px)]">
+                                        <canvas id="rfmDonut"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Bar -->
+                                <div class="bg-[#252d3d] border border-[#2d3748] rounded-lg p-3 overflow-hidden">
+                                    <div class="text-gray-300 text-xs font-semibold mb-2" data-id="Rata-rata Nilai Moneter per Segmen" data-en="Avg Monetary per Segment">
+                                        Avg Monetary per Segmen
+                                    </div>
+                                    <div class="relative w-full h-[clamp(110px,18vw,140px)]">
+                                        <canvas id="rfmMonetary"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Revenue Trend -->
+                            <div class="bg-[#252d3d] border border-[#2d3748] rounded-lg p-3 mb-3">
+                                <div class="text-gray-300 text-xs font-semibold mb-2" data-id="Tren Revenue Bulanan (2023–2024)" data-en="Monthly Revenue Trend (2023–2024)">
+                                    Monthly Revenue Trend (2023–2024)
+                                </div>
+                                <div class="relative w-full h-[clamp(100px,16vw,130px)]">
+                                    <canvas id="revenueChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Cohort Heatmap -->
+                            <div class="bg-[#252d3d] border border-[#2d3748] rounded-lg p-3">
+                                <div class="text-gray-300 text-xs font-semibold mb-2" data-id="Heatmap Retensi Kohort (%)" data-en="Cohort Retention Heatmap (%)">
+                                    Cohort Retention Heatmap (%)
+                                </div>
+                                <div class="relative w-full h-[clamp(140px,22vw,180px)]">
+                                    <canvas id="cohortCanvas" class="w-full h-full"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- RFM Segment Summary Table -->
+                            <div class="bg-[#252d3d] border border-[#2d3748] rounded-lg p-3 mt-3 overflow-x-auto">
+                                <div class="text-gray-300 text-xs font-semibold mb-2" data-id="Ringkasan Segmen RFM" data-en="RFM Segment Summary">
+                                    RFM Segment Summary
+                                </div>
+
+                                <table class="w-full text-[11px] text-center text-gray-300">
+                                    <thead>
+                                        <tr class="text-gray-400 border-b border-[#374151]">
+                                            <th class="py-2 px-2">Segment</th>
+                                            <th class="py-2 px-2">Count</th>
+                                            <th class="py-2 px-2">Avg R</th>
+                                            <th class="py-2 px-2">Avg F</th>
+                                            <th class="py-2 px-2">Avg Monetary</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-white">
+                                        <tr class="border-b border-[#2d3748]">
+                                            <td class="py-2 px-2">
+                                                <span class="px-2 py-0.5 rounded text-green-400 bg-green-900">Champions</span>
+                                            </td>
+                                            <td>187</td><td>8d</td><td>9.2x</td><td>Rp 18,4M</td>
+                                        </tr>
+
+                                        <tr class="border-b border-[#2d3748]">
+                                            <td class="py-2 px-2">
+                                                <span class="px-2 py-0.5 rounded text-green-300 bg-green-700">Loyal Customers</span>
+                                            </td>
+                                            <td>214</td><td>22d</td><td>6.8x</td><td>Rp 11,2M</td>
+                                        </tr>
+
+                                        <tr class="border-b border-[#2d3748]">
+                                            <td class="py-2 px-2">
+                                                <span class="px-2 py-0.5 rounded text-green-300 bg-green-950">Potential Loyalists</span>
+                                            </td>
+                                            <td>156</td><td>31d</td><td>4.1x</td><td>Rp 7,8M</td>
+                                        </tr>
+
+                                        <tr class="border-b border-[#2d3748]">
+                                            <td class="py-2 px-2">
+                                                <span class="px-2 py-0.5 rounded text-yellow-300 bg-yellow-900">Recent Customers</span>
+                                            </td>
+                                            <td>123</td><td>12d</td><td>1.5x</td><td>Rp 4,3M</td>
+                                        </tr>
+
+                                        <tr class="border-b border-[#2d3748]">
+                                            <td class="py-2 px-2">
+                                                <span class="px-2 py-0.5 rounded text-red-300 bg-red-900">At Risk</span>
+                                            </td>
+                                            <td>98</td><td>82d</td><td>3.4x</td><td>Rp 5,9M</td>
+                                        </tr>
+
+                                        <tr class="border-b border-[#2d3748]">
+                                            <td class="py-2 px-2">
+                                                <span class="px-2 py-0.5 rounded text-orange-300 bg-orange-900">Can't Lose Them</span>
+                                            </td>
+                                            <td>72</td><td>95d</td><td>4.8x</td><td>Rp 14,1M</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="py-2 px-2">
+                                                <span class="px-2 py-0.5 rounded text-red-300 bg-red-950">Lost Customers</span>
+                                            </td>
+                                            <td>150</td><td>138d</td><td>1.2x</td><td>Rp 2,1M</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="text-center mt-3 pt-2.5 border-t border-db-border">
+                                <span class="text-[0.6rem] text-[#4b5563]" data-id="Powered by Python · Pandas · Matplotlib ·  Last updated: April 2026" data-en="Powered by Python · Pandas · Matplotlib ·  Last updated: April 2026">
+                                    Powered by Python · Pandas · Matplotlib ·  Last updated: April 2026
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2.5 bg-g-50 border border-g-200 rounded-[10px] p-3 px-3.5 mt-3 text-[0.78rem] text-[#6b9478] leading-[1.55]">
+                        <span>ℹ️</span>
+                        <span data-id="Dashboard di atas merepresentasikan output analisis Python. Jalankan <code>customer_analysis.py</code> untuk menghasilkan visualisasi Matplotlib resolusi tinggi." data-en="The dashboard above represents Python analysis output. Run customer_analysis.py to generate high-resolution Matplotlib visualizations.">
+                            The dashboard above represents Python analysis output. Run customer_analysis.py to generate high-resolution Matplotlib visualizations.
+                        </span>
+                    </div>                    
+                </div>
+                
+                <!-- Workflow -->
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Alur Kerja" data-en="Workflow">Workflow</span>
+                    <div class="font-serif sec-title text-g-900 mb-3.5" data-id="Project Workflow" data-en="Project Workflow">Project Workflow</div>
+                    <div class="flex flex-col">
+                        <div class="flex gap-4 pb-6">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">1</div>
+                                <div class="w-0.5 flex-1 bg-g-200 mt-1.5"></div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Dataset Generation & Identifikasi Masalah" data-en="Dataset Generation & Problem Identification" data-id="Pembuatan Kumpulan Data & Pemahaman Data" data-en="Dataset Generation & Data Understanding">Dataset Generation & Data Understanding</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Dataset sintetis 5.000 transaksi dari 1.000 pelanggan dibuat dengan distribusi pembelian realistis. Data sengaja memiliki dirty data: tanggal null, qty negatif, nama produk dimanipulasi, dan duplikat." data-en="A synthetic dataset of 5,000 transactions from 1,000 customers was created with a realistic purchase distribution (20% heavy buyers). Data intentionally includes dirty records: null dates, negative quantities, corrupt product names, and duplicates.">
+                                    A synthetic dataset of 5,000 transactions from 1,000 customers was created with a realistic purchase distribution (20% heavy buyers). Data intentionally includes dirty records: null dates, negative quantities, corrupt product names, and duplicates.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">🐍 Python · NumPy · random</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">2</div>
+                                <div class="w-0.5 flex-1 bg-g-200 mt-1.5"></div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Data Cleaning dengan Python & Pandas" data-en="Data Cleaning with Python & Pandas">Data Cleaning dengan Python & Pandas</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Script membersihkan duplikat, baris dengan tanggal null, qty negatif, dan nama produk tidak valid. Kolom revenue dihitung setelah cleaning. Output: 4.312 transaksi bersih." data-en="Script removes duplicates, rows with null dates, negative quantities, and invalid product names. The revenue column is calculated after cleaning. Output: 4,312 clean transactions.">
+                                    Script removes duplicates, rows with null dates, negative quantities, and invalid product names. The <code class="bg-green-50 px-[5px] py-[1px] rounded text-[0.75rem]">revenue</code> column is calculated after cleaning. Output: <strong>4,312 clean transactions</strong>.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">🧹 Pandas · NumPy · Regex</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">3</div>
+                                <div class="w-0.5 flex-1 bg-g-200 mt-1.5"></div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Analisis dengan SQL Server (T-SQL)" data-en="Analysis with SQL Server (T-SQL)" data-id="Segmentasi RFM dengan Pandas" data-en="RFM Segmentation with Pandas">RFM Segmentation with Pandas</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Setiap pelanggan dihitung skor Recency, Frequency, dan Monetary menggunakan metode quintile (1–5). Kombinasi skor menghasilkan 7 segmen strategis untuk targeting yang lebih presisi." data-en="Each customer is scored on Recency, Frequency, and Monetary using quintile scoring (1–5). Score combinations produce 7 strategic segments: Champions, Loyal Customers, Potential Loyalists, Recent Customers, At Risk, Can't Lose Them, and Lost Customers.">
+                                    Each customer is scored on Recency, Frequency, and Monetary using quintile scoring (1–5). Score combinations produce 7 strategic segments: Champions, Loyal Customers, Potential Loyalists, Recent Customers, At Risk, Can't Lose Them, and Lost Customers.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">🗄️ RFM Model · pd.qcut · groupby</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col items-center flex-shrink-0">
+                                <div class="w-[34px] h-[34px] rounded-full bg-gradient-to-br from-g-400 to-g-500 flex items-center justify-center text-g-900 font-extrabold text-[0.78rem]">4</div>
+                            </div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.88rem] mb-1" data-id="Visualisasi di Looker Studio" data-en="Visualization in Looker Studio" data-id="Analisis Retensi Kohort Bulanan" data-en="Monthly Cohort Retention Analysis">Monthly Cohort Retention Analysis</div>
+                                <div class="text-[#5a7a65] text-[0.8rem] leading-[1.65]" data-id="Pelanggan dikelompokkan berdasarkan bulan pertama transaksi. Retention rate dihitung relatif terhadap cohort size di M+0. Heatmap memvisualisasikan pola churn sepanjang waktu." data-en="Customers are grouped by their first transaction month (cohort). Retention rates are calculated relative to cohort size at M+0. A Matplotlib/Seaborn heatmap visualizes churn patterns over time.">
+                                    Customers are grouped by their first transaction month (cohort). Retention rates are calculated relative to cohort size at M+0. A Matplotlib/Seaborn heatmap visualizes churn patterns over time.
+                                </div>
+                                <span class="inline-block bg-g-50 text-g-600 text-[0.62rem] font-bold py-[2px] px-2 rounded mt-1.5 border border-g-200">🔁 Cohort · pivot_table · Seaborn Heatmap</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Findings -->
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Insight" data-en="Insight">Insight</span>
+                    <div class="font-serif sec-title text-g-900 mb-3.5" data-id="Key Findings" data-en="Key Findings">Key Findings</div>
+                    <div>
+                        <div class="flex gap-3 py-3.5 border-b border-g-100">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">💎</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="Champions hanya 18.7% tapi kontribusi 41% revenue" data-en="Champions are 18.7% but drive 41% of revenue">Champions are 18.7% but drive 41% of revenue</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Segmen Champions (187 pelanggan) menghasilkan rata-rata Rp 18,4 Juta per pelanggan — 8.7x lebih tinggi dari Lost Customers. Program loyalitas eksklusif untuk segmen ini dapat meningkatkan revenue secara signifikan." data-en="The Champions segment (187 customers) averages Rp 18.4M per customer — 8.7x higher than Lost Customers. An exclusive loyalty program for this segment could significantly boost revenue.">
+                                    The Champions segment (187 customers) averages Rp 18.4M per customer — 8.7x higher than Lost Customers. An exclusive loyalty program for this segment could significantly boost revenue.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 py-3.5 border-b border-g-100">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">📉</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="Retention Drop 60%+ terjadi di bulan pertama (M+1)" data-en="Retention drops 60%+ in the first month (M+1)">Retention drops 60%+ in the first month (M+1)</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Rata-rata hanya 38% pelanggan kembali di bulan kedua. Ini menandakan onboarding yang lemah. Strategi re-engagement seperti email personalisasi atau diskon M+1 berpotensi meningkatkan retensi secara drastis." data-en="On average, only 38% of customers return in the second month, indicating weak onboarding. Re-engagement strategies like personalized emails or M+1 discounts could dramatically improve retention.">
+                                    On average, only 38% of customers return in the second month, indicating weak onboarding. Re-engagement strategies like personalized emails or M+1 discounts could dramatically improve retention.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 py-3.5 border-b border-g-100">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">🔄</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="150 pelanggan 'Lost' masih bisa diaktifkan kembali" data-en="150 'Lost' customers can still be reactivated">150 'Lost' customers can still be reactivated</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Segmen Lost Customers (15%) memiliki monetary historis yang cukup tinggi. Kampanye win-back dengan penawaran eksklusif dapat merekover sekitar 20–30% dari segmen ini." data-en="The Lost Customers segment (15%) has a historically decent monetary value. A win-back campaign with exclusive offers could recover roughly 20–30% of this segment.">
+                                    The Lost Customers segment (15%) has a historically decent monetary value. A win-back campaign with exclusive offers could recover roughly 20–30% of this segment.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 py-3.5">
+                            <div class="w-[34px] h-[34px] min-w-[34px] bg-g-100 rounded-[9px] flex items-center justify-center text-base">📈</div>
+                            <div>
+                                <div class="font-bold text-g-800 text-[0.85rem] mb-1" data-id="Revenue tumbuh 11.4% YoY dari 2023 ke 2024" data-en="Revenue grew 11.4% YoY from 2023 to 2024">Revenue grew 11.4% YoY from 2023 to 2024</div>
+                                <div class="text-[#4a6355] text-[0.8rem] leading-[1.65]" data-id="Meski ada fluktuasi musiman (dip Feb–Mar), tren keseluruhan positif. Puncak revenue terjadi di Desember — indikasi kuat adanya perilaku pembelian musiman yang bisa dieksploitasi dengan kampanye akhir tahun." data-en="Despite seasonal dips (Feb–Mar), the overall trend is positive. Revenue peaks in December — a strong indicator of seasonal buying behavior that can be leveraged with year-end campaigns.">
+                                    Despite seasonal dips (Feb–Mar), the overall trend is positive. Revenue peaks in December — a strong indicator of seasonal buying behavior that can be leveraged with year-end campaigns.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /Main Col -->
+
+            <!-- Right: Sidebar -->
+            <div class="sidebar-sticky flex flex-col gap-5 order-2">
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Info Project" data-en="Project Info">Info Project</span>
+                    <ul class="list-none">
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Status" data-en="Status">Status</span>
+                            <span class="font-semibold text-right" style="color:#16a34a">✅ <span data-id="Selesai" data-en="Completed">Selesai</span></span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Tahun" data-en="Year">Tahun</span>
+                            <span class="text-g-800 font-semibold">2025</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Kategori" data-en="Category">Kategori</span>
+                            <span class="text-g-800 font-semibold" data-id="Analisis Pelanggan" data-en="Customer Analysis">Customer Analysis</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Dataset" data-en="Dataset">Dataset</span>
+                            <span class="text-g-800 font-semibold">5.000 rows (raw)</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] border-b border-g-100 text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Clean Data" data-en="Clean Data">Clean Data</span>
+                            <span class="text-g-800 font-semibold">4.312 rows</span>
+                        </li>
+                        <li class="flex justify-between items-center py-[9px] text-[0.82rem] gap-3">
+                            <span class="text-[#6b9478] font-medium" data-id="Reduction" data-en="Reduction">Reduction</span>
+                            <span class="text-g-800 font-semibold">13.8%</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2">Tech Stack</span>
+                    <div class="flex flex-col gap-[9px] mt-1">
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">🐍</span><div><div class="font-bold text-[0.8rem] text-g-800">Python</div><div class="text-[0.68rem] text-[#6b9478]">Core Language</div></div></div>
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">🐼</span><div><div class="font-bold text-[0.8rem] text-g-800">Pandas</div><div class="text-[0.68rem] text-[#6b9478]">Data manipulation & RFM</div></div></div>
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">📊</span><div><div class="font-bold text-[0.8rem] text-g-800">Matplotlib</div><div class="text-[0.68rem] text-[#6b9478]">Custom chart styling</div></div></div>
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">🎨</span><div><div class="font-bold text-[0.8rem] text-g-800">Seaborn</div><div class="text-[0.68rem] text-[#6b9478]">Cohort Heatmap</div></div></div>
+                        <div class="flex items-center gap-[11px] p-2.5 bg-g-50 rounded-[10px]"><span class="text-[1.3rem]">🔢</span><div><div class="font-bold text-[0.8rem] text-g-800">NumPy</div><div class="text-[0.68rem] text-[#6b9478]">Numerical operations</div></div></div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border-[1.5px] border-g-200 p-[clamp(16px,4vw,28px)] shadow-[0_2px_12px_rgba(20,83,45,0.05)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-500 mb-2" data-id="Download Files" data-en="Download Files">Download Files</span>
+                    <div class="flex flex-col gap-[9px] mt-1">
+                        <a href="dataset_raw/ecommerce_raw.csv" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">📥</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">ecommerce_raw.csv</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Dataset mentah · 5.000 baris" data-en="Raw dataset · 5.000 rows">Raw dataset · 5.000 rows</div></div>
+                        </a>
+                        <a href="dataset_clean/ecommerce_clean.csv" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">✅</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">ecommerce_clean.csv</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Data bersih · 4.312 baris" data-en="Clean data · 4.312 rows">Clean data · 4.312 rows</div></div>
+                        </a>
+                        <a href="python_analysis/customer_analysis.py" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">🐍</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">customer_analysis.py</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Script Python Analisis" data-en="Analysis Python Script">Analysis Python Script</div></div>
+                        </a>
+                        <a href="output/rfm_results.csv" download class="flex items-center gap-2.5 py-2.5 px-[13px] bg-g-50 border-[1.5px] border-g-200 rounded-[10px] no-underline hover:bg-g-100 transition-colors">
+                            <span class="text-[1.2rem]">🗄️</span>
+                            <div><div class="font-bold text-[0.78rem] text-g-800">rfm_results.csv</div><div class="text-[0.65rem] text-[#6b9478]" data-id="Hasil Segmentasi RFM · CSV" data-en="RFM segmentation results · CSV">RFM segmentation results · CSV</div></div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="stats-dark border border-g-700 rounded-2xl p-[clamp(16px,4vw,28px)]">
+                    <span class="block text-[0.7rem] font-bold tracking-[0.08em] uppercase text-g-400 mb-2" data-id="Statistik Data" data-en="Data Statistics">Statistik Data</span>
+                    <div class="grid grid-cols-2 gap-2.5 mt-2.5">
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif">1.000</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]" data-id="Total Pelanggan" data-en="Total Customers">Total Customers</div>
+                        </div>
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif">7</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]" data-id="Segmen RFM" data-en="RFM Segmnets">RFM Segments</div>
+                        </div>
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif">38%</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]" data-id="Rata-Rata Retensi B+1" data-en="Avg Retention M+1">Avg Retention M+1</div>
+                        </div>
+                        <div class="text-center bg-white/[0.08] rounded-[9px] p-[11px_8px]">
+                            <div class="stat-val text-g-400 font-extrabold font-serif" data-id="2 Tahun" data-en="2 Years">2 Tahun</div>
+                            <div class="text-[#86efac] text-[0.6rem] mt-[3px]" data-id="Data Coverage" data-en="Data Coverage">Data Coverage</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === FOOTER === -->
+    <footer class="bg-green-900 text-green-100 py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <p class="text-2xl font-bold mb-2" style="font-family: 'DM Serif Display', serif;">Ilham Hafizt<span class="text-green-400">.</span></p>
+                    <p class="text-green-300 text-sm leading-relaxed" data-en="Data Analyst turning numbers into meaningful stories." data-id="Data Analyst yang bertujuan mengubah angka menjadi cerita bermakna.">
+                        Data Analyst turning numbers into meaningful stories.
+                    </p>
+                    <div class="flex gap-3 mt-4">
+                        <a href="https://github.com/ilhamhafizt" target="_blank" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-g-400 hover:bg-g-400 hover:text-g-900 transition-all duration-200 no-underline">
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ilham-hafizt-50a99a394/" target="_blank" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-g-400 hover:bg-g-400 hover:text-g-900 transition-all duration-200 no-underline">
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="mailto:ilhamhafizt9@gmail.com" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-g-400 hover:bg-g-400 hover:text-g-900 transition-all duration-200 no-underline">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <p class="font-semibold mb-3 text-green-200" data-en="Navigation" data-id="Navigasi">Navigation</p>
+                    <ul class="space-y-2 text-sm text-green-300">
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#about" class="hover:text-green-400 transition-colors" data-en="About" data-id="Tentang" target="_blank">About</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#skills" class="hover:text-green-400 transition-colors" data-en="Skills" data-id="Skill" target="_blank">Skills</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#education" class="hover:text-green-400 transition-colors" data-en="Education" data-id="Pendidikan" target="_blank">Education</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#projects" class="hover:text-green-400 transition-colors" data-en="Projects" data-id="Proyek" target="_blank">Projects</a></li>
+                        <li><a href="https://ilhamhafizt.github.io/Portfolio-Data-Analyst/#contact" class="hover:text-green-400 transition-colors" data-en="Contact" data-id="Kontak" target="_blank">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <p class="font-semibold mb-3 text-green-200" data-en="Contact" data-id="Kontak">Contact</p>
+                    <ul class="space-y-2 text-sm text-green-300">
+                        <li>ilhamhafizt9@gmail.com</a></li>
+                        <li>+62 896-5330-6722</li>
+                        <li data-en="Pontianak, West Kalimantan, Indonesia" data-id="Pontianak, Kalimantan Barat, Indonesia">Pontianak, West Kalimantan, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-green-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-green-400">
+                <p>© 2026 Ilham Hafizt.</p>
+                <p>All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full bg-g-500 text-white shadow-lg flex items-center justify-center hover:bg-g-600 transition-colors duration-200" aria-label="Back to top">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <script src="js/project2.js"></script>
+</body>
+</html>
